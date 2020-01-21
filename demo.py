@@ -22,25 +22,46 @@
 # day = str(int(now.strftime('%d')))
 # a = year + '年' + month + '月' + day + '日'
 # print(a)
+#
+# demo = {
+#     '1001': '关屏幕',
+#     '1002': '开屏幕',
+#     '1003': '重启手机',
+#     '1004': '关机',
+#     '1005': 'home键',
+#     '1006': '后退键',
+#     '1007': '上划',
+#     '1008': '下划',
+#     '1009': '左划',
+#     '1010': '右划',
+#     '1011': '虚拟定位',
+#     '1012': '自定义指令',
+#     '2001': '重启软件',
+#     '2002': '打开软件首页',
+#     '2003': '更新软件',
+#     '2004': '上报手机设备信息'
+# }
+# import random
+#
+# print(random.choice(list(demo)))
 
-demo = {
-    '1001': '关屏幕',
-    '1002': '开屏幕',
-    '1003': '重启手机',
-    '1004': '关机',
-    '1005': 'home键',
-    '1006': '后退键',
-    '1007': '上划',
-    '1008': '下划',
-    '1009': '左划',
-    '1010': '右划',
-    '1011': '虚拟定位',
-    '1012': '自定义指令',
-    '2001': '重启软件',
-    '2002': '打开软件首页',
-    '2003': '更新软件',
-    '2004': '上报手机设备信息'
-}
-import random
 
-print(random.choice(list(demo)))
+# a = [1, 2, 3]
+# print(isinstance(a, list))
+
+
+# import unittest
+# import ddt
+#
+#
+# @ddt.ddt
+# class MyTestCase(unittest.TestCase):
+#
+#     @ddt.data([1, 2, 3], [10, 40, 50], [99, 1, 1000])
+#     @ddt.unpack
+#     def test_add(self, ele1, ele2, result):
+#         self.assertEqual(ele1 + ele2, result)
+#
+#
+# if __name__ == '__main__':
+#     unittest.main()

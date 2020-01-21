@@ -16,7 +16,7 @@ class TestStable(unittest.TestCase):
     login_page = LoginPage(driver)
     home_page = HomePage(driver)
 
-    def tearDown(self) -> None:
+    def tearDown(self):
         self.driver.quit()
 
     def test_stable(self):
@@ -24,9 +24,9 @@ class TestStable(unittest.TestCase):
         self.home_page.click_group_control_manage()
         self.home_page.click_device_manage()
         # self.home_page.click_all_choice_btn()
-        self.home_page.click_choice_btn(['99001182266798', '99001178684004'])
+        self.home_page.click_choice_btn([99001178684004])
         self.home_page.click_batch_operation_btn()
-        self.home_page.random_click_action_list(100)
+        self.home_page.random_click_action_list(1000)
 
 
 if __name__ == '__main__':

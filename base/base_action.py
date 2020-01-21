@@ -4,6 +4,9 @@
 # @Site    : 
 # @File    : base_action.py
 # @Software: PyCharm
+import time
+
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -27,7 +30,7 @@ class BaseAction(object):
             ele = self.find_element(location)
         else:
             ele = self.find_elements(location)[index]
-        ele.click()
+        self.driver.execute_script("arguments[0].click();", ele)
 
     def input_text(self, location, text):
         ele = self.find_element(location)

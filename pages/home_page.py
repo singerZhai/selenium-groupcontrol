@@ -15,7 +15,8 @@ class HomePage(BaseAction):
     device_manage = By.XPATH, '//*[@lay-href="groupcontrol/phone/list"]'
     all_choice_btn = By.XPATH, "//*[@class='layui-icon layui-icon-ok']"
     batch_operation_btn = By.XPATH, '//*[@data-type="batchedit"]'
-    action_num_xpath = By.XPATH, '//*[@data-id="{}"]'
+    # 因selenium定位操作list中的元素有偶现的bug，故使用js
+    click_action_num_css_js = "document.querySelector(\"button[data-id='{}']\").click()"
     action_result_ok_btn = By.XPATH, "//*[@class='layui-layer-btn0']"
     choice_btn = By.XPATH, "//*[@class='layui-icon layui-icon-ok']"
     IMEI = By.XPATH, '//*[@data-field="imei"]'
@@ -38,7 +39,7 @@ class HomePage(BaseAction):
         :param IMEI: type must be list
         :return: None
         """
-        if not isinstance(type(IMEI), list):
+        if not isinstance(IMEI, list):
             raise TypeError('IMEI must be list')
         choice_btn_list = self.find_elements(self.choice_btn)
         IMEI_list = self.find_elements(self.IMEI)
@@ -52,12 +53,12 @@ class HomePage(BaseAction):
 
     def random_click_action_list(self, count):
         action_list = {
-            '1001': '关屏幕',
-            '1002': '开屏幕',
+            # '1001': '关屏幕',
+            # '1002': '开屏幕',
             # '1003': '重启手机',
             # '1004': '关机',
-            '1005': 'home键',
-            '1006': '后退键',
+            # '1005': 'home键',
+            # '1006': '后退键',
             '1007': '上划',
             '1008': '下划',
             '1009': '左划',
@@ -70,26 +71,13 @@ class HomePage(BaseAction):
             # '2004': '上报手机设备信息'
         }
 
-        # action_num_list = [i for i in range(1001, 1013)] + [j for j in range(2001, 2005)]
-        # action_ele_list = [(self.action_num_xpath[0], self.action_num_xpath[1].format(i)) for i in action_num_list]
         for i in range(count):
             random_key = random.choice(list(action_list))
             print(action_list[random_key])
-            action_ele = self.action_num_xpath[0], self.action_num_xpath[1].format(random_key)
             if i != 0:
                 self.click_batch_operation_btn()
             time.sleep(1)
-            self.click(action_ele)
+            self.driver.execute_script(self.click_action_num_css_js.format(random_key))
             time.sleep(1)
-            try:
-                self.click(self.action_result_ok_btn)
-            except Exception:
-                while True:
-                    try:
-                        self.find_element(self.action_result_ok_btn)
-                        self.click(self.action_result_ok_btn)
-                        print('第二次点击{}按键'.format(action_list[random_key]))
-                        break
-                    except Exception:
-                        self.click(action_ele)
-                        print('重新点击{}按键'.format(action_list[random_key]))
+            self.click(self.action_result_ok_btn)
+            time.sleep(1)
